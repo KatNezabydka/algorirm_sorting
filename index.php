@@ -1,11 +1,16 @@
 <?php
 
-$arr = range(0, 10);
+$arr = range(0, 1000000);
 shuffle($arr);
 
-echo '<pre>';
-print_r(quick_sort($arr, 0, count($arr) - 1));
-echo '</pre>';
+$time_start = microtime(true);
+quick_sort($arr, 0, count($arr) - 1);
+$time_end = microtime(true);
+$time = $time_end - $time_start;
+echo 'Time - ' . $time;
+//echo '<pre>';
+//print_r($arr);
+//echo '</pre>';
 
 function quick_sort(&$arr, $startIndex, $endIndex)
 {
@@ -13,7 +18,6 @@ function quick_sort(&$arr, $startIndex, $endIndex)
     $l = $startIndex;
     $r = $endIndex;
 
-    echo $x . '</br>';
     while ($l <= $r) {
         while ($arr[$l] < $x) $l++;
         while ($arr[$r] > $x) $r--;
