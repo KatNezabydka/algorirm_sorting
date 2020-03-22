@@ -1,9 +1,39 @@
-version: '3'
-
+version: "3"
 services:
-  web:
-    build: .
+  nginx:
+    image: nginx:latest
     ports:
-      - 8080:80
+      - 8081:80
     volumes:
-      - .:/var/www/html
+      - .:/var/www/html/
+      - ./docker/dev.nginx.conf:/etc/nginx-conf/nginx.conf
+    links:
+      - php-fpm
+    working_dir: /var/www/html
+    entrypoint: ["nginx","-c","/etc/nginx-conf/nginx.conf"]
+  #    environment:
+  #    - VIRTUAL_HOST=docker-test.loc
+  #    expose:
+  #    - 8081
+
+  php-fpm:
+    build: .
+    #php:7.4.3-fpm
+    ports:
+      - 9000
+#    links:
+#      - db
+    volumes:
+      - .:/var/www/html/
+    working_dir: /var/www/html
+    container_name: php-fpm
+
+#version: '3'
+#
+#services:
+#  web:
+#    build: .
+#    ports:
+#      - 80:80
+#    volumes:
+#      - .:/var/www/html

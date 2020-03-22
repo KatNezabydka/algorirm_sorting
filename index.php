@@ -1,6 +1,6 @@
 <?php
 
-const ARRAY_COUNT = 1_000_000;
+const ARRAY_COUNT = 1_000;
 
 $arrayForQuickSort = getArray(ARRAY_COUNT);
 $time_start = microtime(true);
