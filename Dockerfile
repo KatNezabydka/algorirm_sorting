@@ -5,4 +5,6 @@ RUN apt-get update && apt-get install -y libpq-dev && docker-php-ext-install pdo
 RUN pecl install xdebug \
     && docker-php-ext-enable xdebug
 
-COPY docker /usr/local/etc/php/conf.d/xdebug.ini
+COPY docker/xdebug.ini /usr/local/etc/php/conf.d/xdebug.ini
+
+COPY docker/dev.99-overrides.ini /usr/local/etc/php/conf.d/99-overrides.ini
